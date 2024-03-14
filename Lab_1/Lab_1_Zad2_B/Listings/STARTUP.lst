@@ -1,0 +1,52 @@
+A51 MACRO ASSEMBLER  STARTUP                                                              03/14/2024 08:55:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\STARTUP.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) OBJECT(.\Obj
+                      ects\STARTUP.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     MY_KILLING_COPY SEGMENT CODE
+                       2             
+  0030                 3     Cel DATA 30h    
+----                   4     CSEG AT 0
+0000 020000   F        5     JMP start
+----                   6     RSEG MY_KILLING_COPY
+                       7             
+0000                   8     start:
+0000 7830              9             MOV R0,#Cel
+0002 900000   F       10             MOV DPTR,#dane
+0005 7B05             11             MOV R3,#5
+                      12             
+0007                  13             Petla:
+0007 93               14                     MOVC A,@A+DPTR
+0008 F6               15                     MOV @R0,A
+0009 A3               16                     INC DPTR
+000A 08               17                     INC R0
+000B E4               18                     CLR A
+000C DBF9             19             DJNZ R3,Petla
+                      20             
+000E 0B150412         21             dane: DB 11, 21, 4, 18, 8
+0012 08                      
+                      22     END
+A51 MACRO ASSEMBLER  STARTUP                                                              03/14/2024 08:55:33 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CEL. . . . . . . .  D ADDR   0030H   A   
+DANE . . . . . . .  C ADDR   000EH   R   SEG=MY_KILLING_COPY
+MY_KILLING_COPY. .  C SEG    0013H       REL=UNIT
+PETLA. . . . . . .  C ADDR   0007H   R   SEG=MY_KILLING_COPY
+START. . . . . . .  C ADDR   0000H   R   SEG=MY_KILLING_COPY
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

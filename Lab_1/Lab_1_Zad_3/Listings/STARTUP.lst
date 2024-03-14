@@ -1,0 +1,93 @@
+A51 MACRO ASSEMBLER  STARTUP                                                              03/14/2024 15:48:10 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\STARTUP.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) OBJECT(.\Obj
+                      ects\STARTUP.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     WINTERFELL SEGMENT CODE
+                       2             
+  0030                 3     poczatek DATA 30h ;pierwszy adres ciagu
+  0039                 4     koniec DATA 39h ;ostatni adres ciagu
+  0036                 5     num_a DATA 36h ;siodma cyfra
+  0039                 6     num_b DATA 39h ;dziesiata cyfra
+  0004                 7     modulo EQU 4 ; mod 4 (bo zakres 0-3)
+                       8             
+----                   9     CSEG AT 0
+0000 020000   F       10     JMP start
+----                  11     RSEG WINTERFELL
+                      12             
+0000                  13     start:
+0000 7830             14             MOV R0, #poczatek
+0002 900000   F       15             MOV DPTR, #ciag
+0005 7B0A             16             MOV R3, #10 ;ilosc liczb do przepisania
+                      17             
+0007                  18             inicjalizacja: ;przepisanie liczb do IRAMu
+0007 93               19                     MOVC A, @A+DPTR 
+0008 F6               20                     MOV @R0, A
+0009 A3               21                     INC DPTR
+000A 08               22                     INC R0;
+000B E4               23                     CLR A;
+000C DBF9             24                     DJNZ R3, inicjalizacja
+                      25             
+000E                  26             zmiana_adr_gen:
+000E 7836             27                     MOV R0, #num_a ;przenosimy adres 7mej liczby do R0
+0010 7939             28                     MOV R1, #num_b ;przenosimy adres 10tej liczby do R1
+                      29             
+0012                  30             generowanie:
+0012 E6               31                     MOV A, @R0 ;do A przenosimy 7ma liczbe
+0013 27               32                     ADD A, @R1 ;dodajemy 10ta liczbe
+0014 75F004           33                     MOV B, #modulo ;do B przenosimy modulo
+0017 84               34                     DIV AB ;W B pozostaje reszta, czyli liczba pseudolosowa
+0018 E5F0             35                     MOV A, B ; w A ma zostac liczba pseudolosowa
+                      36             
+001A                  37             zmiana_adr_prze:
+001A 7830             38                     MOV R0,#poczatek ; ustawiamy adres pierwszego el
+001C 7930             39                     MOV R1,#poczatek
+001E 09               40                     INC R1 ; ustawiamy adres elementu R0+1
+001F 7B09             41                     MOV R3, #9 ;omijamy ostatni element, czyli 9 iter
+                      42                     
+0021                  43             przeniesienie: ;przenosimy ciag w IRAM o jeden do przodu
+0021 87F0             44                     MOV B, @R1
+0023 A6F0             45                     MOV @R0,B
+0025 08               46                     INC R0
+0026 09               47                     INC R1
+0027 DBF8             48                     DJNZ R3, przeniesienie
+0029 F539             49                     MOV koniec, A
+002B 80E1             50                     JMP zmiana_adr_gen
+                      51             
+002D 04050303         52     ciag: DB 4, 5, 3, 3, 3, 4, 6, 2, 6, 5
+0031 03040602                
+0035 0605                    
+                      53     END
+A51 MACRO ASSEMBLER  STARTUP                                                              03/14/2024 15:48:10 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+CIAG . . . . . . .  C ADDR   002DH   R   SEG=WINTERFELL
+GENEROWANIE. . . .  C ADDR   0012H   R   SEG=WINTERFELL
+INICJALIZACJA. . .  C ADDR   0007H   R   SEG=WINTERFELL
+KONIEC . . . . . .  D ADDR   0039H   A   
+MODULO . . . . . .  N NUMB   0004H   A   
+NUM_A. . . . . . .  D ADDR   0036H   A   
+NUM_B. . . . . . .  D ADDR   0039H   A   
+POCZATEK . . . . .  D ADDR   0030H   A   
+PRZENIESIENIE. . .  C ADDR   0021H   R   SEG=WINTERFELL
+START. . . . . . .  C ADDR   0000H   R   SEG=WINTERFELL
+WINTERFELL . . . .  C SEG    0037H       REL=UNIT
+ZMIANA_ADR_GEN . .  C ADDR   000EH   R   SEG=WINTERFELL
+ZMIANA_ADR_PRZE. .  C ADDR   001AH   R   SEG=WINTERFELL
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

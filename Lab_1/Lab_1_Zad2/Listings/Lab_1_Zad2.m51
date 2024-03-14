@@ -1,0 +1,57 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    03/13/2024  16:52:39  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj TO .\Objects\Lab_1_Zad2 PRINT (.\Listings\Lab_1_Zad2.m51) RAMSIZE (256
+>> )
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\Lab_1_Zad2 (STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     000CH     UNIT         MY_KILLING_COPY
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Lab_1_Zad2 (STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        STARTUP
+  C:0800H         SEGMENT       MY_KILLING_COPY
+  D:0030H         SYMBOL        CEL
+  N:0010H         SYMBOL        ILEDANYCH
+  C:0806H         SYMBOL        PETLA
+  C:0800H         SYMBOL        START
+  D:0020H         SYMBOL        ZRODLO
+  C:0000H         LINE#         7
+  C:0800H         LINE#         11
+  C:0802H         LINE#         12
+  C:0804H         LINE#         13
+  C:0806H         LINE#         15
+  C:0807H         LINE#         16
+  C:0808H         LINE#         17
+  C:0809H         LINE#         18
+  C:080AH         LINE#         19
+  -------         ENDMOD        STARTUP
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 000FH BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=15
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

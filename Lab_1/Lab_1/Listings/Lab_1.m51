@@ -1,0 +1,56 @@
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    03/13/2024  16:14:39  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj TO .\Objects\Lab_1 PRINT (.\Listings\Lab_1.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\Lab_1 (STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0002H     ABSOLUTE     
+                    0002H     00FEH                  *** GAP ***
+            CODE    0100H     0012H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Lab_1 (STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        STARTUP
+  D:0021H         SYMBOL        DANAH
+  D:0020H         SYMBOL        DANAL
+  N:03E8H         SYMBOL        STALA
+  C:0100H         SYMBOL        START
+  D:0031H         SYMBOL        WYNIKH
+  D:0030H         SYMBOL        WYNIKL
+  C:0000H         LINE#         7
+  C:0100H         LINE#         11
+  C:0103H         LINE#         12
+  C:0106H         LINE#         14
+  C:0108H         LINE#         15
+  C:010AH         LINE#         16
+  C:010CH         LINE#         17
+  C:010EH         LINE#         18
+  C:0110H         LINE#         19
+  -------         ENDMOD        STARTUP
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0014H BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=20
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

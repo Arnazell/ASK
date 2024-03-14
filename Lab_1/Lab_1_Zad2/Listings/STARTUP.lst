@@ -1,0 +1,77 @@
+A51 MACRO ASSEMBLER  STARTUP                                                              03/13/2024 16:59:06 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+NO OBJECT MODULE REQUESTED
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) OBJECT(.\Obj
+                      ects\STARTUP.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0x0000
+                       2     
+                       3     ; Adresy pamieci dla startowych liczb
+0000                   4     START_NUMBERS_ADDR: DATA 0x30  ; Adres poczatkowy w pamieci RAM (IRAM) dla startowych liczb
+*** _____________________________________________^
+*** ERROR #A9 IN 4 (STARTUP.A51, LINE 4): SYNTAX ERROR
+                       5     
+                       6     ; Inicjalizacja generatora
+0000                   7     INITIALIZE:
+0000 900000            8         MOV DPTR, #START_NUMBERS_ADDR  ; Wczytaj adres poczatkowy startowych liczb
+0003 7900              9         MOV R1, #0                      ; Inicjalizuj licznik
+                      10     
+                      11         ; Skopiuj startowe liczby do pamieci IRAM
+0005                  12     COPY_START_NUMBERS:
+0005 E0               13         MOVX A, @DPTR                   ; Wczytaj liczbe
+0006 F8               14         MOV R0, A                       ; Zapisz do R0
+0007                  15         MOV @R1, R0                     ; Skopiuj do pamieci IRAM
+*** _________________________________^
+*** ERROR #A40 IN 15 (STARTUP.A51, LINE 15): INVALID REGISTER
+0007 A3               16         INC DPTR                        ; Przejdz do nastepnej liczby
+0008 09               17         INC R1                          ; Zwieksz licznik
+0009 B90AF9           18         CJNE R1, #10, COPY_START_NUMBERS ; Powtarzaj dopóki nie skopiujesz wszystkich liczb
+000C 22               19         RET                             ; Zakoncz procedure
+                      20     
+                      21     ; Procedura generujaca kolejna liczbe pseudolosowa
+000D                  22     GENERATE_RANDOM_NUMBER:
+000D 7B00             23         MOV R3, #0x00                   ; Zeruj akumulator wyniku
+000F 7A0A             24         MOV R2, #0x0A                   ; Inicjalizuj krok dla ciagu Fibonacciego
+0011 7907             25         MOV R1, #0x07                   ; Inicjalizuj startowy indeks dla ciagu Fibonacciego
+0013 7802             26         MOV R0, #0x02                   ; Inicjalizuj drugi indeks dla ciagu Fibonacciego
+                      27     
+0015                  28     GENERATE_LOOP:
+0015 E7               29         MOV A, @R1                      ; Wczytaj pierwsza liczbe Fibonacciego
+0016 26               30         ADD A, @R0                      ; Dodaj druga liczbe Fibonacciego
+0017 5403             31         ANL A, #0x03                    ; Wyzeruj najstarsze bity, aby uzyskac liczbe w przedziale 0-3
+0019                  32         MOV @R3, A                      ; Zapisz wynik w rejestrze R3
+*** _________________________________^
+*** __________________________________^
+*** ERROR #A4 IN 32 (STARTUP.A51, LINE 32): BAD INDIRECT REGISTER
+*** ERROR #A9 IN 32 (STARTUP.A51, LINE 32): SYNTAX ERROR
+                      33     
+0019 0B               34         INC R3                          ; Przejdz do kolejnego miejsca w pamieci wyniku
+001A 09               35         INC R1                          ; Przejdz do kolejnej liczby Fibonacciego
+001B 08               36         INC R0                          ; Przejdz do kolejnej liczby Fibonacciego
+                      37     
+001C DAF7             38         DJNZ R2, GENERATE_LOOP          ; Powtarzaj do momentu wygenerowania 10 liczb
+001E 22               39         RET 
+                      40     END     ; Zakoncz procedure
+A51 MACRO ASSEMBLER  STARTUP                                                              03/13/2024 16:59:06 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E                 T Y P E  V A L U E   ATTRIBUTES
+
+COPY_START_NUMBERS . .  C ADDR   0005H   A   
+GENERATE_LOOP. . . . .  C ADDR   0015H   A   
+GENERATE_RANDOM_NUMBER  C ADDR   000DH   A   
+INITIALIZE . . . . . .  C ADDR   0000H   A   
+START_NUMBERS_ADDR . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 4 ERROR(S)

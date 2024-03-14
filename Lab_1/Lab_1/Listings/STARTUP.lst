@@ -1,0 +1,50 @@
+A51 MACRO ASSEMBLER  STARTUP                                                              03/13/2024 16:14:38 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\STARTUP.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) OBJECT(.\Obj
+                      ects\STARTUP.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  03E8                 1     Stala EQU 1000
+  0020                 2     DanaL DATA 20h
+  0021                 3     DanaH DATA 21h
+  0030                 4     WynikL DATA 30h
+  0031                 5     WynikH DATA 31h
+----                   6     CSEG AT 0
+0000 2100              7     JMP start
+----                   8     CSEG AT 100h
+0100                   9             start:
+                      10             ;zmiana wartosci komorek pamieci
+0100 752018           11             MOV 20h, #18h
+0103 752100           12             MOV 21h, #00h
+                      13     
+0106 E520             14             MOV A,DanaL
+0108 24E8             15             ADD A,#low(Stala)
+010A F530             16             MOV WynikL,A
+010C E521             17             MOV A,DanaH
+010E 3403             18             ADDC A,#high(Stala)
+0110 F531             19             MOV WynikH,A
+                      20     END
+A51 MACRO ASSEMBLER  STARTUP                                                              03/13/2024 16:14:38 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DANAH. . . . . . .  D ADDR   0021H   A   
+DANAL. . . . . . .  D ADDR   0020H   A   
+STALA. . . . . . .  N NUMB   03E8H   A   
+START. . . . . . .  C ADDR   0100H   A   
+WYNIKH . . . . . .  D ADDR   0031H   A   
+WYNIKL . . . . . .  D ADDR   0030H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

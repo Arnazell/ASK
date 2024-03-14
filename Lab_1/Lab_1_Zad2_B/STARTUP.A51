@@ -1,0 +1,22 @@
+MY_KILLING_COPY SEGMENT CODE
+	
+Cel DATA 30h	
+CSEG AT 0
+JMP start
+RSEG MY_KILLING_COPY
+	
+start:
+	MOV R0,#Cel
+	MOV DPTR,#dane
+	MOV R3,#5
+	
+	Petla:
+		MOVC A,@A+DPTR
+		MOV @R0,A
+		INC DPTR
+		INC R0
+		CLR A
+	DJNZ R3,Petla
+	
+	dane: DB 11, 21, 4, 18, 8
+END
